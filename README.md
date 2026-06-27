@@ -1,7 +1,8 @@
 # Natural-sailing-in-the-ocean-The-in-situ-sailing-behavior-of-the-siphonophore-Physalia-physalis-
 This repository contains all code, figures, databases, videos, and material used in the making of the article  Natural sailing in the ocean: “The in situ sailing behavior of the siphonophore Physalia physalis” by Mario Cabrera-Lavara as student of the University of Oviedo and member of the project PHYSALIA, supervised by Dr. Jose Luis Acuña-Fernandez.
 
-Video data is stored externally due to file size (10 GB). It is separated in 3 .rar files (~3.5GB) that can be accessed from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/10.5281/zenodo.20978184.svg)]10.5281/zenodo.20978184
+Video data is stored externally due to file size (10 GB). It is separated in 3 .rar files (~3.5GB) that can be accessed from Zenodo: 
+> **Zenodo DOI:** [![DOI](https://zenodo.org/badge/DOI/10.5281/10.5281/zenodo.20978184.svg)](https://doi.org/10.5281/zenodo.zenodo.20978184)  
 
 ---
 
