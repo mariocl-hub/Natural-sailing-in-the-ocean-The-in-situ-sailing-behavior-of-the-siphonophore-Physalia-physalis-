@@ -46,6 +46,7 @@ Asturias_analized/
 └── Video 8 (20250730_BUCKET#009_drone-camera_DJI_202508041221_008)/
     └── [same subfolder structure as Video 5]
 ```
+ Auxiliary or complementary files may also be present in non-sequential folders, such as .csv files with classification data or converted .mp4 files
 
 ---
 
@@ -59,7 +60,7 @@ Each tracking unit is organized in a subfolder named after the DJI clip it origi
 | `*_detected_cropped_classified.mp4` | Cropped footage with posture classification labels overlaid per frame (classes: C_Shape, L_Shape, Upright, Laid_down, Normal). |
 | `*_detected_cropped_classified_per_second.xlsx` | Dominant posture class aggregated per second across the clip, used as input for statistical analyses. |
 | `*_detected_cropped_vector_overlay_5s_bin.mp4` | Cropped footage with motion vectors (drift direction and speed) overlaid in 5-second temporal bins. |
- 
+
 ---
 
 ## Naming Conventions
@@ -69,6 +70,7 @@ Each tracking unit is organized in a subfolder named after the DJI clip it origi
 - Later sessions: `Video N (YYYYMMDD_BUCKET#XXX_drone-camera_DJI_{timestamp}_{session_id})`
 **Clip-level subfolders** follow DJI's standard naming:
 - `DJI_{YYYYMMDD}{HHMMSS}_{sequence}_D`
+
 ---
 
 ## How to Use
