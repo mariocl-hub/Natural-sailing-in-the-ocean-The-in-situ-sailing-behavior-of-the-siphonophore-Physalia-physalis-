@@ -1,0 +1,9 @@
+ID,UTC,LAT,LON,NSAT,CELSIUS,BAT,VOLBAT
+row[0] -> ID
+row[1] -> UTC
+row[2] -> LAT
+row[3] -> LON
+row[4] -> NSAT
+row[5] -> CELSIUS
+row[6] -> BAT
+row[7] -> VOLBAT
