@@ -1149,4 +1149,4 @@ print(p_polar_class); print(p_polar_facet); print(p_polar_video); print(p_rose)
 print(p_ang_cd_global); print(p_ang_cd_session)
 print(p_delta_cd);    print(p_abs_cd_box); print(p_abs_cd_hist); print(p_abs_cd_ecdf)
 
-cat("\n¡Análisis completado!\n")
+cat("\nAnalysis complete.\n")

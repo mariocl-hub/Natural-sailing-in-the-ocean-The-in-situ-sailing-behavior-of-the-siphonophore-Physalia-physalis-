@@ -3,72 +3,48 @@ import cv2
 import csv
 from tqdm import tqdm
 
-#Load YOLO model
-model = YOLO(r"C:\Users\Usuario\Documents\Mario\Estudios\Master Universitario\TFM\programación\best_model_clasifier.pt")
+# --- CONFIGURATION ---
+# Update these paths before running
+MODEL_PATH  = r"models/best_model_clasifier.pt"
+INPUT_VIDEO = r"data/Asturias_analized/Video 3 (30_07_2025_11_30AM)/DJI_20250730114620_0003_D/DJI_20250730114620_0003_D-003_detected_cropped.MP4"
+OUTPUT_VIDEO = INPUT_VIDEO.replace(".MP4", "_classified.mp4").replace(".mp4", "_classified.mp4")
+OUTPUT_CSV   = OUTPUT_VIDEO.replace(".mp4", ".csv")
 
-#Open video
-video_path = r"C:\Users\Usuario\Documents\Mario\Estudios\Master Universitario\TFM\database\Video 3 (30_07_2025_11_30AM)\DJI_20250730114620_0003_D\DJI_20250730114620_0003_D-003_detected_cropped.MP4"
-cap = cv2.VideoCapture(video_path)
+model = YOLO(MODEL_PATH)
+cap   = cv2.VideoCapture(INPUT_VIDEO)
 
-#Video output settings
-output_path = r"C:\Users\Usuario\Documents\Mario\Estudios\Master Universitario\TFM\database\Video 3 (30_07_2025_11_30AM)\DJI_20250730114620_0003_D\DJI_20250730114620_0003_D_detected_cropped_classified.csv"
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-fps = cap.get(cv2.CAP_PROP_FPS)
-width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+fps    = cap.get(cv2.CAP_PROP_FPS)
+width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
-out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
+fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+out    = cv2.VideoWriter(OUTPUT_VIDEO, fourcc, fps, (width, height))
 
 if not out.isOpened():
-    print("Error: Could not open video for writing.")
-    exit()
+    raise RuntimeError(f"Could not open video writer for: {OUTPUT_VIDEO}")
 
-while cap.isOpened():
-    #CSV setup for results
-    csv_path = output_path.replace(".mp4", ".csv")
-    csv_file = open(csv_path, "w", newline="")
+total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
+with open(OUTPUT_CSV, "w", newline="") as csv_file:
     writer = csv.writer(csv_file)
     writer.writerow(["frame", "class", "confidence"])
 
-    #Progress bar setup
-    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    
-    #Progress bar loop for YOLO inference
-    for frame_id in tqdm(range(total_frames), desc="Processing frames"):
+    for frame_id in tqdm(range(total_frames), desc="Classifying frames"):
         ret, frame = cap.read()
         if not ret:
             break
-    
-    #Usual YOLO inference loop
-    #while cap.isOpened():
-    #    ret, frame = cap.read()
-    #    if not ret:
-    #        break
 
-        # YOLO inference
         results = model(frame)
-        r = results[0]
+        r       = results[0]
 
         if r.probs is not None:
-            cls = int(r.probs.top1)
-            conf = float(r.probs.top1conf)
+            cls        = int(r.probs.top1)
+            conf       = float(r.probs.top1conf)
             class_name = model.names[cls]
-
             writer.writerow([frame_id, class_name, conf])
 
-        annotated_frame = r.plot()
+        out.write(r.plot())
 
-        # Save frame
-        out.write(annotated_frame)
+cap.release()
+out.release()
 
-        # Optional preview, commented out for efficiency
-        """cv2.imshow("YOLO Inference", annotated_frame)
-        if cv2.waitKey(1) & 0xFF == 27:
-            break"""
-
-    cap.release()
-    out.release()
-    csv_file.close()
-    #cv2.destroyAllWindows() #Comentado para evitar errores en entornos sin GUI
-
-    print(f"Finished: {output_path}")
+print(f"Done: {OUTPUT_VIDEO}")

@@ -1935,5 +1935,5 @@ print(p_cd_video)
 print(p_class_wind)
 print(p_class_curr)
 
-cat("\n¡Análisis completado!\n")
+cat("\nAnalysis complete.\n")
 
