@@ -78,5 +78,5 @@ Each tracking unit is organized in a subfolder named after the DJI clip it origi
 1. Download the `.rar` archive parts from Zenodo (`Asturias_analized.part1.rar`, `.part2.rar`, etc.)
 2. Extract using [WinRAR](https://www.rarlab.com/) or [7-Zip](https://www.7-zip.org/) — open `part1.rar` and all parts will be joined automatically
 3. Place the extracted `Asturias_analized/` folder in the root of this repository
-4. Analysis scripts in `scripts/` reference this folder by relative path
+4. Analysis scripts in `code/` reference this folder by relative path
 ---
